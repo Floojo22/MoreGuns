@@ -17,7 +17,7 @@ namespace MoreGuns.Patches
 
         public static void Prefix(Registry __instance, string ID)
         {
-            if (!isWeaponsRegistered)
+            if (!isWeaponsRegistered && WeaponBase.allWeapons.Count > 0)
             {
                 foreach (WeaponBase weapon in WeaponBase.allWeapons)
                 {
@@ -25,8 +25,8 @@ namespace MoreGuns.Patches
                     __instance.AddToRegistry(weapon.gunIntItemDef);
                     MelonLogger.Msg($"Registered {weapon.ID} item definition and magazine.");
                 }
+                isWeaponsRegistered = true;
             }
-            isWeaponsRegistered = true;
         }
     }
 }
