@@ -18,6 +18,11 @@ namespace MoreGunsMono.Patches
         private static bool _isInititalized = false;
         private static string _shopName = "ArmsDealerInterface";
 
+        public static void ResetInitialized()
+        {
+            _isInititalized = false;
+        }
+
         public static void Prefix(ShopInterface __instance)
         {
             if (__instance.gameObject.name != _shopName) return;
