@@ -82,6 +82,12 @@ namespace MoreGunsMono
 
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
+            // Always reset registration flags on any scene load so that
+            // custom items and shop listings are re-registered into fresh
+            // Registry / ShopInterface instances created by the new scene.
+            ItemRegistryPatch.isWeaponsRegistered = false;
+            ArmsDealerInterfacePatch.ResetInitialized();
+
             if (sceneName == "Main")
             {
                 NetworkController.SyncConfiguration();
@@ -90,10 +96,6 @@ namespace MoreGunsMono
                 Transform HUD = GameObject.Find("UI/HUD").transform;
                 ReloadMessage.Initialize(HUD);
                 WindupIndicator.Initialize(HUD);
-            }
-            else
-            {
-                ItemRegistryPatch.isWeaponsRegistered = false;
             }
         }
 
